@@ -1,0 +1,16 @@
+/* Capa de PRESENTACIÓN: el JS solo pone o quita clases (6h) */
+body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 1rem; color: #333; }
+h1 { color: #43309F; }
+.campo { display: grid; grid-template-columns: 1fr; gap: .2rem; margin-bottom: 1rem; }
+label { font-weight: 600; }
+input { padding: .5rem; border: 1px solid #bbb; border-radius: 6px; font: inherit; }
+.feedback { font-size: .85rem; min-height: 1.1em; }
+
+input.valido { border-color: #2e8b57; background: #eefaf2; }
+input.invalido { border-color: #c0392b; background: #fdeeee; }
+input.valido + .feedback { color: #2e8b57; }
+input.invalido + .feedback { color: #c0392b; }
+
+.botones button { padding: .55rem 1.1rem; border-radius: 6px; border: 1px solid #43309F; background: #43309F; color: #fff; cursor: pointer; }
+.botones button[type=reset] { background: #fff; color: #43309F; }
+#confirmacion { padding: .8rem 1rem; border-radius: 6px; background: #eefaf2; border: 1px solid #2e8b57; color: #1e6b40; }
