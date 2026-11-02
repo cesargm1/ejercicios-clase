@@ -9,7 +9,6 @@
 
 const form = document.forms.registro;
 const { nombre, email, edad, password, password2 } = form.elements;
-const confirmacion = document.getElementById("confirmacion");
 
 // TODO (Ej. 2): desactiva la validación nativa del navegador para controlarla desde JS
 
@@ -37,11 +36,36 @@ const RE_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
  * usando como clave el nombre de la propiedad de validity (valueMissing, tooShort, typeMismatch…).
  */
 const MENSAJES = {
-	nombre: { valueMissing: "El nombre es obligatorio" /* , … */ },
-	email: {},
-	edad: {},
-	password: {},
-	password2: {},
+	nombre: {
+		valueMissing: "El nombre es obligatorio",
+		tooShort: "El nombre debe tener al menos 3 caracteres",
+		typeMismatch: "Introduce un nombre válido",
+	},
+	email: {
+		valueMissing: "El correo electrónico es obligatorio",
+		typeMismatch: "Introduce una dirección de correo electrónico válida",
+		tooShort: "El correo electrónico es demasiado corto",
+	},
+	edad: {
+		valueMissing: "La edad es obligatoria",
+		typeMismatch: "Introduce una edad válida",
+		rangeUnderflow: "Debes tener al menos 18 años",
+		rangeOverflow: "La edad introducida supera el límite permitido",
+		stepMismatch: "Introduce una edad válida",
+		badInput: "Introduce la edad utilizando números",
+	},
+	password: {
+		valueMissing: "La contraseña es obligatoria",
+		tooShort: "La contraseña debe tener al menos 8 caracteres",
+		tooLong: "La contraseña es demasiado larga",
+		patternMismatch: "La contraseña debe cumplir los requisitos de seguridad",
+	},
+	password2: {
+		valueMissing: "Debes repetir la contraseña",
+		tooShort: "La contraseña debe tener al menos 8 caracteres",
+		tooLong: "La contraseña es demasiado larga",
+		patternMismatch: "La contraseña no cumple los requisitos",
+	},
 };
 
 /**
@@ -51,7 +75,8 @@ const MENSAJES = {
  * @returns {string}
  */
 function mensajeDe(campo) {
-	// TODO
+	for (const err in MENSAJES) if (campo.validity[err]) return MENSAJES[err];
+	return campo.validationMessage;
 }
 
 // =====================================================
@@ -67,7 +92,36 @@ function mensajeDe(campo) {
  * @returns {boolean}
  */
 function validarCampo(campo) {
-	// TODO
+	const name = campo.name;
+	campo.setCustomValidity("");
+
+	if (name === "nombre") {
+		if (!RE_NOMBRE.test(campo.value)) {
+			campo.setCustomValidity("El nombre no tiene un formato válido.");
+		}
+		pintar(campo);
+		return campo.validity.valid;
+	}
+
+	if (name === "email") {
+		if (!RE_EMAIL.test(campo.value)) {
+			campo.setCustomValidity("El correo electrónico no es válido.");
+		}
+		pintar(campo);
+		return campo.validity.valid;
+	}
+
+	if (name === "password") {
+		if (!RE_PASSWORD.test(campo.value)) {
+			campo.setCustomValidity("La contraseña no cumple los requisitos.");
+		}
+		pintar(campo);
+		return campo.validity.valid;
+	}
+
+	if (password.value !== password2.value) {
+		campo.setCustomValidity("Las contraseñas no coinciden.");
+	}
 }
 
 /**
@@ -76,6 +130,11 @@ function validarCampo(campo) {
  */
 function validarPasswords() {
 	// TODO
+
+	const igual = password.value === password2.value;
+	password2.setCustomValidity(igual ? "" : "No coinciden");
+	pintar(password);
+	pintar(password2);
 }
 
 // =====================================================
@@ -88,7 +147,17 @@ function validarPasswords() {
  * @param {HTMLInputElement} campo
  */
 function pintar(campo) {
-	// TODO
+	const feedback = campo.nextElementSibling;
+
+	if (campo.validity.valid) {
+		campo.classList.add("valido");
+		campo.classList.remove("invalido");
+		feedback.textContent = "✓";
+	} else {
+		campo.classList.add("invalido");
+		campo.classList.remove("valido");
+		feedback.textContent = campo.validationMessage;
+	}
 }
 
 // =====================================================
@@ -97,11 +166,37 @@ function pintar(campo) {
 
 // TODO: validación en vivo de nombre, email y edad al salir del campo (blur) y, a partir de entonces, en cada input.
 // TODO: password → validarPasswords en cada input; password2 → validarCampo en cada input.
+
 // TODO: submit → evita el envío, valida TODOS los campos y:
 //         - si todo es válido, muestra #confirmacion con el nombre y el correo y reinicia el formulario;
 //         - si no, pon el foco en el primer campo con error.
-// TODO: reset → elimina mensajes, clases, aria-invalid y errores personalizados.
 
+const botonSubmit = document.querySelector('button[type="submit"]');
+
+const botonReset = document.querySelector('button[type="reset"]');
+
+botonSubmit.addEventListener("click", function (event) {
+	const confirmacion = document.getElementById("confirmacion");
+	event.preventDefault();
+	if (validarCampo()) {
+		const name = document.getElementById("nombre");
+		const email = document.getElementById("email");
+
+		confirmacion.textContent = `nombre:${name} correo: ${email}`;
+		form.reset();
+	} else {
+		const PrimerInputInvalido = document.querySelector(".invalido");
+		PrimerInputInvalido.focus();
+	}
+});
+// TODO: reset → elimina mensajes, clases, aria-invalid y errores personalizados.
+form.addEventListener("reset", function () {
+	Array.from(form.elements).forEach((input) => {
+		input.classList.remove("error");
+		input.removeAttribute("aria-invalid");
+		input.setCustomValidity("");
+	});
+});
 /*
  * RESPUESTAS Ej. 4 (6f) · Abre la página en dos navegadores (o cambia el idioma del navegador) con
  * MENSAJES vacío y anota qué devuelve validationMessage para un campo obligatorio vacío.
