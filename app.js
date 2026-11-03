@@ -9,6 +9,7 @@
 
 const form = document.forms.registro;
 const { nombre, email, edad, password, password2 } = form.elements;
+form.noValidate = true;
 
 // TODO (Ej. 2): desactiva la validación nativa del navegador para controlarla desde JS
 
@@ -75,7 +76,8 @@ const MENSAJES = {
  * @returns {string}
  */
 function mensajeDe(campo) {
-	for (const err in MENSAJES) if (campo.validity[err]) return MENSAJES[err];
+	for (const err in MENSAJES[campo.name])
+		if (campo.validity[err]) return MENSAJES[campo.name][err];
 	return campo.validationMessage;
 }
 
@@ -119,8 +121,12 @@ function validarCampo(campo) {
 		return campo.validity.valid;
 	}
 
-	if (password.value !== password2.value) {
-		campo.setCustomValidity("Las contraseñas no coinciden.");
+	if (name === "password2") {
+		if (password.value !== password2.value) {
+			campo.setCustomValidity("Las contraseñas no coinciden.");
+		}
+		pintar(campo);
+		return campo.validity.valid;
 	}
 }
 
@@ -130,11 +136,12 @@ function validarCampo(campo) {
  */
 function validarPasswords() {
 	// TODO
-
-	const igual = password.value === password2.value;
-	password2.setCustomValidity(igual ? "" : "No coinciden");
-	pintar(password);
-	pintar(password2);
+	validarCampo(password);
+	if (password2.value !== "") {
+		const igual = password.value === password2.value;
+		password2.setCustomValidity(igual ? "" : "No coinciden");
+		validarCampo(password2);
+	}
 }
 
 // =====================================================
@@ -165,7 +172,55 @@ function pintar(campo) {
 // =====================================================
 
 // TODO: validación en vivo de nombre, email y edad al salir del campo (blur) y, a partir de entonces, en cada input.
+
+let nombreTocado = false;
+let emailTocado = false;
+let edadTocada = false;
+
+// NOMBRE
+nombre.addEventListener("blur", function () {
+	nombreTocado = true;
+	validarCampo(nombre);
+});
+
+nombre.addEventListener("input", function () {
+	if (nombreTocado) {
+		validarCampo(nombre);
+	}
+});
+
+// EMAIL
+email.addEventListener("blur", function () {
+	emailTocado = true;
+	validarCampo(email);
+});
+
+email.addEventListener("input", function () {
+	if (emailTocado) {
+		validarCampo(email);
+	}
+});
+
+// EDAD
+edad.addEventListener("blur", function () {
+	edadTocada = true;
+	validarCampo(edad);
+});
+
+edad.addEventListener("input", function () {
+	if (edadTocada) {
+		validarCampo(edad);
+	}
+});
 // TODO: password → validarPasswords en cada input; password2 → validarCampo en cada input.
+
+password.addEventListener("input", function () {
+	validarPasswords();
+});
+
+password2.addEventListener("input", function () {
+	validarCampo(password2);
+});
 
 // TODO: submit → evita el envío, valida TODOS los campos y:
 //         - si todo es válido, muestra #confirmacion con el nombre y el correo y reinicia el formulario;
@@ -175,25 +230,36 @@ const botonSubmit = document.querySelector('button[type="submit"]');
 
 const botonReset = document.querySelector('button[type="reset"]');
 
-botonSubmit.addEventListener("click", function (event) {
-	const confirmacion = document.getElementById("confirmacion");
+form.addEventListener("submit", function (event) {
 	event.preventDefault();
-	if (validarCampo()) {
-		const name = document.getElementById("nombre");
-		const email = document.getElementById("email");
 
-		confirmacion.textContent = `nombre:${name} correo: ${email}`;
+	const confirmacion = document.getElementById("confirmacion");
+
+	const valido =
+		validarCampo(nombre) &&
+		validarCampo(email) &&
+		validarCampo(edad) &&
+		validarCampo(password) &&
+		validarCampo(password2);
+
+	if (valido) {
+		confirmacion.textContent = `Nombre: ${nombre.value} Correo: ${email.value}`;
+
 		form.reset();
 	} else {
-		const PrimerInputInvalido = document.querySelector(".invalido");
-		PrimerInputInvalido.focus();
+		const primerInputInvalido = form.querySelector(".invalido");
+		if (primerInputInvalido) {
+			primerInputInvalido.focus();
+		}
 	}
 });
 // TODO: reset → elimina mensajes, clases, aria-invalid y errores personalizados.
 form.addEventListener("reset", function () {
 	Array.from(form.elements).forEach((input) => {
-		input.classList.remove("error");
+		input.classList.remove("invalido");
+		input.classList.remove("valido");
 		input.removeAttribute("aria-invalid");
+		input.nextElementSibling.textContent = "";
 		input.setCustomValidity("");
 	});
 });
