@@ -6,12 +6,12 @@
  * Antes de programar, completa UP4A4.html: name, type y atributos de validación de cada campo,
  * value en radios y checkboxes, y type="submit"/"reset" en los botones.
  */
-import { comunidades } from './UP4A4-comunidades.js';
-import { provincias } from './UP4A4-provincias.js';
-import { municipios } from './UP4A4-municipios.js';
+import { comunidades } from "./UP4A4-comunidades.js";
+import { provincias } from "./UP4A4-provincias.js";
+import { municipios } from "./UP4A4-municipios.js";
 
-const form = document.getElementById('user-form');
-const tbody = document.querySelector('#users-list tbody');
+const form = document.getElementById("user-form");
+const tbody = document.querySelector("#users-list tbody");
 
 /** Usuarios registrados (array interno). */
 const usuarios = [];
@@ -36,9 +36,23 @@ const usuarios = [];
  * @param {{codigo: string, nombre: string}[]} datos
  */
 function rellenarSelect(select, datos) {
-  // TODO
+	const opcion = document.createElement("option");
+	opcion.textContent = "Selecciona una opción";
+	select.appendChild(opcion);
+	datos.forEach((dato) => {
+		const opcion = document.createElement("option");
+		opcion.value = dato.codigo;
+		opcion.textContent = dato.nombre;
+		select.appendChild(opcion);
+	});
 }
 // TODO: carga las comunidades al iniciar.
+
+document.addEventListener("DOMContentLoaded", () => {
+	const comunidad = document.getElementById("comunidad");
+	rellenarSelect(comunidad, comunidades);
+});
+
 // TODO: al cambiar la comunidad → carga sus provincias y vacía los municipios.
 // TODO: al cambiar la provincia → carga sus municipios.
 
