@@ -1,0 +1,30 @@
+#user-form input {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+#user-form input.error {
+    border-color: red;
+    background-color: pink;
+}
+
+#user-form .error-text {
+    margin-left: 5px;
+    color: red;
+    font-size: 75%;
+}
+
+#user-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#user-form label:has(input[type=checkbox],input[type=radio]) {
+    display: inline;
+}
+/* --- añadidos de la solución --- */
+#user-form select.error, #user-form input.error { border-color: red; background-color: pink; }
+#user-form .grupo { display: block; margin-bottom: 10px; }
+#users-list { border-collapse: collapse; margin-top: 1.5rem; width: 100%; font-size: .9rem; }
+#users-list th, #users-list td { border: 1px solid #ccc; padding: .3rem .5rem; text-align: left; }
+#users-list th { background: #43309F; color: #fff; }

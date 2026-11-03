@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+    <link href="UP4A4.css" type="text/css" rel="stylesheet">
+    <script type="module" src="UP4A4.js"></script>
+</head>
+<body>
+    <main>
+        <h1>Gestión de usuarios</h1>
+        <form id="user-form">
+            <fieldset name="client">
+                <legend>Datos del cliente</legend>
+                <label>Nombre y apellidos <input placeholder="Nombre Apellido Apellido"><span class="error-text"></span></label>
+                <label>DNI <input placeholder="00000000-A"><span class="error-text"></span></label>
+                <label>Teléfono: <input placeholder="000-00-00-00"><span class="error-text"></span></label>
+                <span>
+                    Género <label><input type="radio"> Masculino</label>
+                    <label><input type="radio"> Femenino <span class="error-text"></span></label>
+                </span>
+                
+                <fieldset name="address">
+                    <legend>Dirección</legend>
+                    <label>Comunidad autónoma <select></select></label>
+                    <label>Provincia <select></select></label>
+                    <label>Municipio <select></select></label>
+                    <label>Dirección <input placeholder="Av. Paseo de la Castellana 123"></label>
+                    <label>CP <input placeholder="00000"></label>
+                </fieldset>
+            </fieldset>
+            <fieldset name="account">
+                <legend>Datos de la cuenta</legend>
+                <label>Nombre de usuario <input placeholder="nombre-usuario"><span class="error-text"></span></label>
+                <label>Email <input placeholder="example@mail.com"><span class="error-text"></span></label>
+                <label>Repetir email <input placeholder="example@mail.com"><span class="error-text"></span></label>
+                <fieldset name="interests">
+                    <legend>Intereses</legend>
+                    <label><input type="checkbox"> Futbol</label>
+                    <label><input type="checkbox"> Tenis</label>
+                    <label><input type="checkbox"> Beisbol</label>
+                    <label><input type="checkbox"> Hockey</label>
+                    <label><input type="checkbox"> Volleyball</label>
+                    <label><input type="checkbox"> Badminton</label>
+                    <label><input type="checkbox"> Golf</label>
+                    <span class="error-text"></span>
+                </fieldset>
+                <label><input type="checkbox"> Acepto los términos del servicio.<span class="error-text"></span></label>
+            </fieldset>
+            <input value="Registrar">
+            <input value="Reiniciar">
+        </form>
+        <table id="users-list">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Nombre de usuario</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+</body>
+</html>
