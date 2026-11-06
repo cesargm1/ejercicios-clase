@@ -15,25 +15,38 @@
 					<legend>Datos del cliente</legend>
 					<label
 						>Nombre y apellidos
-						<input placeholder="Nombre Apellido Apellido" /><span
+						<input
+							type="text"
+							id="nombreApellidos"
+							required
+							placeholder="Nombre Apellido Apellido" /><span
 							class="error-text"
 						></span
 					></label>
 					<label
-						>DNI <input placeholder="00000000-A" /><span
-							class="error-text"
-						></span
+						>DNI
+						<input
+							type="text"
+							required
+							id="dni"
+							placeholder="00000000-A" /><span class="error-text"></span
 					></label>
 					<label
-						>Teléfono: <input placeholder="000-00-00-00" /><span
+						>Teléfono: <input id="telefono" placeholder="000-00-00-00" /><span
 							class="error-text"
 						></span
 					></label>
 					<span>
-						Género <label><input type="radio" /> Masculino</label>
+						Género
 						<label
-							><input type="radio" /> Femenino <span class="error-text"></span
-						></label>
+							><input type="radio" name="genero" value="Masculino" />
+							Masculino</label
+						>
+						<label
+							><input type="radio" name="genero" value="Femenino" />
+							Femenino</label
+						>
+						<span class="error-text"></span>
 					</span>
 
 					<fieldset name="address">
@@ -51,25 +64,30 @@
 							<select id="municipio"></select
 						></label>
 						<label
-							>Dirección <input placeholder="Av. Paseo de la Castellana 123"
+							>Dirección
+							<input
+								id="direccion"
+								placeholder="Av. Paseo de la Castellana 123"
 						/></label>
-						<label>CP <input placeholder="00000" /></label>
+						<label>CP <input id="cp" placeholder="00000" /></label>
 					</fieldset>
 				</fieldset>
 				<fieldset name="account">
 					<legend>Datos de la cuenta</legend>
 					<label
-						>Nombre de usuario <input placeholder="nombre-usuario" /><span
+						>Nombre de usuario
+						<input id="usuario" placeholder="nombre-usuario" /><span
 							class="error-text"
 						></span
 					></label>
 					<label
-						>Email <input placeholder="example@mail.com" /><span
+						>Email <input id="email" placeholder="example@mail.com" /><span
 							class="error-text"
 						></span
 					></label>
 					<label
-						>Repetir email <input placeholder="example@mail.com" /><span
+						>Repetir email
+						<input id="email2" placeholder="example@mail.com" /><span
 							class="error-text"
 						></span
 					></label>
