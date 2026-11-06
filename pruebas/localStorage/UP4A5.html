@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>NEXUS CRM - Gestión de clientes</title>
+		<link rel="stylesheet" href="UP4A5.css" />
+		<script type="module" src="UP4A5.js"></script>
+	</head>
+
+	<body>
+		<header class="topbar">
+			<a href="#" class="logo">
+				<span class="logo-icon">N</span>
+				<span>ATELIER CRM</span>
+			</a>
+			<span class="topbar-label">GESTIÓN DE CLIENTES</span>
+		</header>
+
+		<main class="container">
+			<section class="welcome">
+				<div>
+					<p class="eyebrow">PANEL DE CONTROL</p>
+					<h1>Gestión de clientes</h1>
+					<p class="subtitle">Administra y consulta tus clientes.</p>
+				</div>
+				<div class="date-card">
+					<span class="status-dot"></span>
+					Sistema activo
+				</div>
+			</section>
+
+			<!-- ESTADÍSTICAS -->
+			<section class="stats-grid">
+				<article class="stat-card">
+					<span class="stat-label">CLIENTES REGISTRADOS</span>
+					<strong id="total-clientes">0</strong>
+					<span class="stat-description">Total almacenado</span>
+				</article>
+
+				<article class="stat-card">
+					<span class="stat-label">VISITAS DE ESTA SESIÓN</span>
+					<strong id="contador">0</strong>
+					<span class="stat-description">Contador de sesión</span>
+				</article>
+			</section>
+
+			<section class="content-grid">
+				<!-- FORMULARIO DE CLIENTES -->
+				<article class="panel form-panel">
+					<div class="panel-heading">
+						<div>
+							<p class="eyebrow">NUEVO REGISTRO</p>
+							<h2>Datos del cliente</h2>
+						</div>
+						<span class="panel-icon">+</span>
+					</div>
+
+					<form id="user-form">
+						<div class="form-grid">
+							<div class="field">
+								<label for="nombre">Nombre completo</label>
+								<input
+									type="text"
+									id="nombre"
+									name="nombre"
+									placeholder="Nombre y apellidos"
+								/>
+								<span class="error-text"></span>
+							</div>
+
+							<div class="field">
+								<label for="dni">DNI / NIE</label>
+								<input
+									type="text"
+									id="dni"
+									name="dni"
+									placeholder="00000000X"
+								/>
+								<span class="error-text"></span>
+							</div>
+
+							<div class="field">
+								<label for="telefono">Teléfono</label>
+								<input
+									type="tel"
+									id="telefono"
+									name="telefono"
+									placeholder="600000000"
+								/>
+								<span class="error-text"></span>
+							</div>
+
+							<div class="field">
+								<label>Género</label>
+								<div class="radio-group">
+									<label>
+										<input type="radio" name="genero" value="Hombre" />
+										Hombre
+									</label>
+									<label>
+										<input type="radio" name="genero" value="Mujer" />
+										Mujer
+									</label>
+									<label>
+										<input type="radio" name="genero" value="Otro" />
+										Otro
+									</label>
+								</div>
+								<span class="error-text"></span>
+							</div>
+
+							<div class="field">
+								<label for="usuario">Nombre de usuario</label>
+								<input
+									type="text"
+									id="usuario"
+									name="usuario"
+									placeholder="usuario123"
+								/>
+								<span class="error-text"></span>
+							</div>
+
+							<div class="field">
+								<label for="email">Correo electrónico</label>
+								<input
+									type="email"
+									id="email"
+									name="email"
+									placeholder="correo@ejemplo.com"
+								/>
+								<span class="error-text"></span>
+							</div>
+
+							<div class="field full">
+								<label for="email2">Repetir correo electrónico</label>
+								<input
+									type="email"
+									id="email2"
+									name="email2"
+									placeholder="Repite tu correo"
+								/>
+								<span class="error-text"></span>
+							</div>
+
+							<fieldset class="field full">
+								<legend>Intereses</legend>
+
+								<div class="checkbox-group">
+									<label>
+										<input
+											type="checkbox"
+											name="intereses"
+											value="Tecnología"
+										/>
+										Tecnología
+									</label>
+
+									<label>
+										<input type="checkbox" name="intereses" value="Deporte" />
+										Deporte
+									</label>
+
+									<label>
+										<input type="checkbox" name="intereses" value="Viajes" />
+										Viajes
+									</label>
+
+									<label>
+										<input type="checkbox" name="intereses" value="Música" />
+										Música
+									</label>
+								</div>
+
+								<span class="error-text"></span>
+							</fieldset>
+
+							<div class="field full terms-field">
+								<label class="terms-label">
+									<input type="checkbox" id="terminos" name="terminos" />
+									Acepto los términos y condiciones.
+								</label>
+								<span class="error-text"></span>
+							</div>
+						</div>
+
+						<div class="form-actions">
+							<button type="reset" class="button button-secondary">
+								Limpiar
+							</button>
+
+							<button type="submit" class="button button-primary">
+								Guardar cliente →
+							</button>
+						</div>
+					</form>
+				</article>
+
+				<!-- SESIÓN -->
+				<aside class="side-column">
+					<article class="panel session-panel">
+						<div class="panel-heading">
+							<div>
+								<p class="eyebrow">ACCESO</p>
+								<h2>Sesión de usuario</h2>
+							</div>
+							<span class="panel-icon">◉</span>
+						</div>
+
+						<p class="panel-description">
+							Inicia una sesión de demostración. No introduzcas contraseñas.
+						</p>
+
+						<form id="login-form">
+							<div class="field">
+								<label for="login-usuario">Nombre de usuario</label>
+								<input
+									type="text"
+									id="login-usuario"
+									placeholder="Tu nombre de usuario"
+								/>
+							</div>
+
+							<button type="submit" class="button button-primary button-wide">
+								Iniciar sesión
+							</button>
+						</form>
+
+						<div class="session-info">
+							<p id="estado-sesion">Sin sesión iniciada</p>
+
+							<p>
+								Usuario:
+								<strong id="usuario-sesion">—</strong>
+							</p>
+
+							<p>
+								Inicio:
+								<strong id="fecha-sesion">—</strong>
+							</p>
+
+							<button
+								type="button"
+								id="logout-button"
+								class="button button-secondary button-wide"
+							>
+								Cerrar sesión
+							</button>
+						</div>
+					</article>
+				</aside>
+			</section>
+
+			<!-- TABLA DE CLIENTES -->
+			<section class="panel table-panel">
+				<div class="panel-heading">
+					<div>
+						<p class="eyebrow">BASE DE DATOS</p>
+						<h2>Clientes registrados</h2>
+					</div>
+					<span class="table-count">LISTADO GENERAL</span>
+				</div>
+
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>DNI</th>
+								<th>Teléfono</th>
+								<th>Usuario</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+
+						<tbody id="users-list"></tbody>
+					</table>
+				</div>
+			</section>
+
+			<footer>
+				<span>NEXUS CRM</span>
+				<span>Proyecto educativo · Ejercicio A5</span>
+			</footer>
+		</main>
+
+		<!-- PREFERENCIAS DE COOKIES -->
+		<button type="button" id="open-cookies" class="cookie-settings">
+			Preferencias de cookies
+		</button>
+
+		<section id="cookie-banner" class="cookie-banner">
+			<div>
+				<p class="eyebrow">PRIVACIDAD</p>
+				<h2>Configura tus preferencias</h2>
+				<p>Elige qué categorías de cookies deseas permitir.</p>
+			</div>
+
+			<div class="cookie-options">
+				<label>
+					<input type="checkbox" checked disabled />
+					Necesarias
+					<span>Siempre activas</span>
+				</label>
+
+				<label>
+					<input type="checkbox" id="cookie-marketing" />
+					Marketing
+				</label>
+
+				<label>
+					<input type="checkbox" id="cookie-tracking" />
+					Seguimiento
+				</label>
+			</div>
+
+			<div class="cookie-actions">
+				<button
+					type="button"
+					id="cookie-reject"
+					class="button button-secondary"
+				>
+					Rechazar opcionales
+				</button>
+
+				<button type="button" id="cookie-save" class="button button-secondary">
+					Guardar selección
+				</button>
+
+				<button type="button" id="cookie-accept" class="button button-primary">
+					Aceptar todas
+				</button>
+			</div>
+		</section>
+	</body>
+</html>
