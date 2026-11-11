@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>UP4_A4 · Gestión de usuarios</title>
+		<link href="UP4A4.css" rel="stylesheet" />
+		<!-- type="module": necesita servidor (Live Server). Con doble clic (file://) no carga. -->
+		<script type="module" src="UP4A4.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>Gestión de usuarios</h1>
+			<p>Visitas en esta sesión: <span id="contador"></span></p>
+			<form id="user-form" novalidate>
+				<fieldset name="client">
+					<legend>Datos del cliente</legend>
+					<label
+						>Nombre y apellidos*
+						<input
+							name="nombre"
+							required
+							minlength="4"
+							placeholder="Nombre Apellido Apellido"
+							autocomplete="name" /><span class="error-text"></span
+					></label>
+					<label
+						>DNI* <input name="dni" required placeholder="00000000-A" /><span
+							class="error-text"
+						></span
+					></label>
+					<label
+						>Teléfono
+						<input name="telefono" type="tel" placeholder="000-00-00-00" /><span
+							class="error-text"
+						></span
+					></label>
+					<span class="grupo">
+						Género*
+						<label
+							><input type="radio" name="genero" value="M" required />
+							Masculino</label
+						>
+						<label
+							><input type="radio" name="genero" value="F" /> Femenino</label
+						>
+						<label
+							><input type="radio" name="genero" value="X" /> Prefiero no
+							decirlo</label
+						>
+						<span class="error-text"></span>
+					</span>
+
+					<fieldset name="address">
+						<legend>Dirección</legend>
+						<label
+							>Comunidad autónoma
+							<select name="comunidad"></select
+						></label>
+						<label
+							>Provincia
+							<select name="provincia"></select
+						></label>
+						<label
+							>Municipio
+							<select name="municipio"></select
+						></label>
+						<label
+							>Dirección
+							<input
+								name="direccion"
+								placeholder="Av. Paseo de la Castellana 123"
+								autocomplete="street-address"
+						/></label>
+						<label
+							>CP
+							<input name="cp" placeholder="00000" inputmode="numeric" /><span
+								class="error-text"
+							></span
+						></label>
+					</fieldset>
+				</fieldset>
+
+				<fieldset name="account">
+					<legend>Datos de la cuenta</legend>
+					<label
+						>Nombre de usuario*
+						<input
+							name="usuario"
+							required
+							placeholder="nombre-usuario"
+							autocomplete="username" /><span class="error-text"></span
+					></label>
+					<label
+						>Email*
+						<input
+							name="email"
+							type="email"
+							required
+							placeholder="example@mail.com"
+							autocomplete="email" /><span class="error-text"></span
+					></label>
+					<label
+						>Repetir email*
+						<input
+							name="email2"
+							type="email"
+							required
+							placeholder="example@mail.com"
+							autocomplete="off" /><span class="error-text"></span
+					></label>
+					<fieldset name="interests">
+						<legend>Intereses* (mínimo 3)</legend>
+						<label
+							><input type="checkbox" name="intereses" value="futbol" />
+							Fútbol</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="tenis" />
+							Tenis</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="beisbol" />
+							Béisbol</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="hockey" />
+							Hockey</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="voleibol" />
+							Voleibol</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="badminton" />
+							Bádminton</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="golf" />
+							Golf</label
+						>
+						<span class="error-text"></span>
+					</fieldset>
+					<label
+						><input type="checkbox" name="terminos" required /> Acepto los
+						términos del servicio.*<span class="error-text"></span
+					></label>
+				</fieldset>
+				<button type="submit">Registrar</button>
+				<button type="reset">Reiniciar</button>
+			</form>
+			<section id="login">
+				<h2>Inicio de sesión</h2>
+				<span id="userData"></span>
+
+				<form id="login-form">
+					<label>
+						Nombre de usuario:
+						<input
+							type="text"
+							name="usuario"
+							id="usuario-login"
+							required
+							placeholder="Introduce tu usuario"
+						/>
+					</label>
+
+					<button type="submit">Iniciar sesión</button>
+					<button type="button" id="cerrar-sesion">Cerrar sesión</button>
+				</form>
+
+				<p id="mensaje-sesion"></p>
+			</section>
+			<table id="users-list">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>DNI</th>
+						<th>Usuario</th>
+						<th>Email</th>
+						<th>CA / Prov. / Mun. (códigos)</th>
+						<th>Intereses</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			```html
+			<section id="cookie-banner">
+				<h2>Configuración de cookies</h2>
+
+				<p>
+					Utilizamos cookies para mejorar tu experiencia. Puedes elegir qué
+					tipos de cookies permites.
+				</p>
+
+				<div>
+					<label>
+						<input type="checkbox" checked disabled />
+						Cookies obligatorias
+					</label>
+					<p>Necesarias para el funcionamiento de la página.</p>
+				</div>
+
+				<div>
+					<label>
+						<input type="checkbox" id="cookies-marketing" />
+						Cookies de marketing
+					</label>
+					<p>Permiten personalizar contenido y publicidad.</p>
+				</div>
+
+				<div>
+					<label>
+						<input type="checkbox" id="cookies-tracking" />
+						Cookies de seguimiento
+					</label>
+					<p>Permiten analizar cómo se utiliza la página.</p>
+				</div>
+
+				<button type="button" id="guardar-cookies">Guardar preferencias</button>
+			</section>
+			```
+		</main>
+	</body>
+</html>

@@ -1,0 +1,180 @@
+#user-form input {
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+#user-form input.error {
+	border-color: red;
+	background-color: pink;
+}
+
+#user-form .error-text {
+	margin-left: 5px;
+	color: red;
+	font-size: 75%;
+}
+
+#user-form label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+#user-form label:has(input[type="checkbox"], input[type="radio"]) {
+	display: inline;
+}
+/* --- añadidos de la solución --- */
+#user-form select.error,
+#user-form input.error {
+	border-color: red;
+	background-color: pink;
+}
+#user-form .grupo {
+	display: block;
+	margin-bottom: 10px;
+}
+#users-list {
+	border-collapse: collapse;
+	margin-top: 1.5rem;
+	width: 100%;
+	font-size: 0.9rem;
+}
+#users-list th,
+#users-list td {
+	border: 1px solid #ccc;
+	padding: 0.3rem 0.5rem;
+	text-align: left;
+}
+#users-list th {
+	background: #43309f;
+	color: #fff;
+}
+
+#contador {
+	display: inline-block;
+	background-color: #43309f;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 8px 18px;
+	border-radius: 20px;
+	margin-left: 8px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Apartado de inicio de sesión */
+#login {
+	background-color: #f4f6f9;
+	border: 1px solid #d9dee7;
+	border-radius: 12px;
+	padding: 20px;
+	margin: 25px 0;
+	max-width: 450px;
+}
+
+#login h2 {
+	color: #26364a;
+	margin-top: 0;
+	margin-bottom: 18px;
+}
+
+#login label {
+	display: block;
+	margin-bottom: 12px;
+	font-weight: bold;
+}
+
+#login input {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+	margin-top: 7px;
+	border: 1px solid #bfc7d3;
+	border-radius: 6px;
+	font-size: 15px;
+}
+
+#login button {
+	padding: 10px 18px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 14px;
+	margin-top: 10px;
+	transition: background-color 0.2s;
+}
+
+/* Botón iniciar sesión */
+#login-form button {
+	background-color: #2563eb;
+	color: white;
+}
+
+#login-form button:hover {
+	background-color: #1d4ed8;
+}
+
+/* Mensaje de sesión */
+#mensaje-sesion {
+	color: #26364a;
+	font-weight: bold;
+}
+
+/* Botón cerrar sesión */
+#login #cerrar-sesion {
+	background-color: #dc3545;
+	color: white;
+}
+
+#login #cerrar-sesion:hover {
+	background-color: #b02a37;
+}
+
+#cookie-banner {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	max-width: 600px;
+	padding: 25px;
+	background-color: #fff;
+	color: #333;
+	border: 1px solid #ddd;
+	border-radius: 12px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	font-family: Arial, sans-serif;
+}
+
+#cookie-banner h2 {
+	margin-top: 0;
+	color: #222;
+}
+
+#cookie-banner p {
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+#cookie-banner label {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+#cookie-banner button {
+	margin-top: 15px;
+	padding: 10px 18px;
+	border: none;
+	border-radius: 6px;
+	background-color: #2563eb;
+	color: white;
+	cursor: pointer;
+}
+
+#cookie-banner button:hover {
+	background-color: #1d4ed8;
+}

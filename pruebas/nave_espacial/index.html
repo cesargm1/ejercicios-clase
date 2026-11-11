@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Control de nave espacial</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<main class="panel">
+			<header>
+				<span class="etiqueta">SISTEMA DE CONTROL</span>
+				<h1>🚀 NAVE ESPACIAL</h1>
+				<p class="subtitulo">Panel de gestión de energía</p>
+			</header>
+
+			<section class="energia-card">
+				<h2>Nivel de energía</h2>
+
+				<div class="energia-numero">
+					<span id="energia">100</span>
+					<small>%</small>
+				</div>
+
+				<div class="barra">
+					<div class="barra-progreso" id="barra-progreso"></div>
+				</div>
+
+				<p id="estado">Sistema operativo</p>
+			</section>
+
+			<section class="controles">
+				<h2>Controles de energía</h2>
+
+				<button id="usar" class="btn btn-usar">− Usar energía</button>
+
+				<button id="recargar" class="btn btn-recargar">
+					+ Recargar energía
+				</button>
+			</section>
+
+			<footer>
+				<span>MISSION CONTROL</span>
+				<span>© 2026</span>
+			</footer>
+		</main>
+
+		<script src="app.js"></script>
+	</body>
+</html>

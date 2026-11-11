@@ -1,0 +1,133 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Arial, sans-serif;
+	background: radial-gradient(circle, #172554, #020617);
+	color: white;
+	padding: 20px;
+}
+
+.panel {
+	width: 100%;
+	max-width: 430px;
+	padding: 30px;
+	background: #0f172a;
+	border: 1px solid #334155;
+	border-radius: 20px;
+	box-shadow: 0 0 35px #0ea5e955;
+}
+
+header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.etiqueta {
+	color: #38bdf8;
+	font-size: 11px;
+	letter-spacing: 3px;
+}
+
+h1 {
+	margin: 12px 0;
+	font-size: 25px;
+}
+
+.subtitulo {
+	color: #94a3b8;
+	font-size: 14px;
+}
+
+.energia-card {
+	background: #1e293b;
+	padding: 25px;
+	border-radius: 15px;
+	text-align: center;
+}
+
+.energia-card h2,
+.controles h2 {
+	font-size: 17px;
+	margin-bottom: 20px;
+}
+
+.energia-numero {
+	font-size: 65px;
+	font-weight: bold;
+	color: #38bdf8;
+}
+
+.energia-numero small {
+	font-size: 20px;
+}
+
+.barra {
+	width: 100%;
+	height: 12px;
+	background: #334155;
+	border-radius: 20px;
+	overflow: hidden;
+	margin: 20px 0;
+}
+
+.barra-progreso {
+	width: 100%;
+	height: 100%;
+	background: #38bdf8;
+	border-radius: 20px;
+	transition: width 0.3s;
+}
+
+#estado {
+	color: #4ade80;
+	font-size: 14px;
+}
+
+.controles {
+	margin-top: 30px;
+}
+
+.btn {
+	width: 100%;
+	padding: 14px;
+	border: none;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-bottom: 12px;
+	transition:
+		transform 0.2s,
+		opacity 0.2s;
+}
+
+.btn:hover {
+	transform: scale(1.03);
+}
+
+.btn-usar {
+	background: #ef4444;
+	color: white;
+}
+
+.btn-recargar {
+	background: #0ea5e9;
+	color: white;
+}
+
+footer {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 25px;
+	color: #64748b;
+	font-size: 10px;
+	letter-spacing: 1px;
+}
