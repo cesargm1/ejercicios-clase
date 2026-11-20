@@ -1,6 +1,4 @@
-# 🚀 UP4_A6 · Control de energía de una nave espacial
-
-**Alumno/a:** ********\_\_\_\_********
+# 🚀Control de energía de una nave espacial
 
 ## 📌 Descripción
 

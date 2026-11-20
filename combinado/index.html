@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>UP4 · Repaso · Inscripción al taller</title>
+		<link href="UP4R.css" rel="stylesheet" />
+		<!-- type="module": necesita servidor (Live Server). -->
+		<script type="module" src="UP4R.js"></script>
+	</head>
+	<body>
+		<main>
+			<h1>Inscripción al taller de Desarrollo Web</h1>
+			<p>Plazas libres: <strong id="plazas"></strong></p>
+
+			<form id="inscripcion" novalidate>
+				<fieldset>
+					<legend>Datos personales</legend>
+					<div class="campo">
+						<!-- TODO 1: nombre → required, minlength="4", autocomplete="name" -->
+						<label
+							>Nombre y apellidos*
+							<input
+								name="nombre"
+								required
+								minlength="4"
+								autocomplete="name"
+								placeholder="Ana García López"
+						/></label>
+						<span class="error-text"></span>
+					</div>
+					<div class="campo">
+						<!-- TODO 1: email → type="email", required -->
+						<label
+							>Correo electrónico*
+							<input
+								name="email"
+								type="email"
+								required
+								placeholder="ana@mail.com"
+						/></label>
+						<span class="error-text"></span>
+					</div>
+					<div class="campo">
+						<!-- TODO 1: email2 → type="email", required -->
+						<label
+							>Repetir correo* <input type="email" required name="email2"
+						/></label>
+						<span class="error-text"></span>
+					</div>
+					<div class="campo">
+						<span class="grupo">Género*</span>
+						<!-- TODO 1: el primer radio lleva required (vale para todo el grupo) -->
+						<label
+							><input type="radio" required name="genero" value="M" />
+							Masculino</label
+						>
+						<label
+							><input type="radio" name="genero" value="F" /> Femenino</label
+						>
+						<label
+							><input type="radio" name="genero" value="X" /> Prefiero no
+							decirlo</label
+						>
+						<span class="error-text"></span>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Contraseña de acceso</legend>
+					<div class="campo">
+						<!-- TODO 1: password → type="password", required, minlength="8" -->
+						<label
+							>Contraseña*
+							<input name="password" type="password" required minlength="8"
+						/></label>
+						<span class="error-text"></span>
+					</div>
+					<div class="campo">
+						<!-- TODO 1: password2 → type="password", required -->
+						<label
+							>Repetir contraseña*
+							<input name="password2" type="password" required
+						/></label>
+						<span class="error-text"></span>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Procedencia (opcional)</legend>
+					<label
+						>Comunidad autónoma
+						<select name="comunidad" id="comunidad"></select
+					></label>
+					<label
+						>Provincia
+						<select name="provincia" id="provincia"></select
+					></label>
+					<label
+						>Municipio
+						<select name="municipio" id="municipio"></select
+					></label>
+				</fieldset>
+
+				<fieldset>
+					<legend>Intereses* (mínimo 3)</legend>
+					<div class="campo">
+						<label
+							><input type="checkbox" name="intereses" value="html" />
+							HTML</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="css" /> CSS</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="js" />
+							JavaScript</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="php" /> PHP</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="angular" />
+							Angular</label
+						>
+						<label
+							><input type="checkbox" name="intereses" value="wordpress" />
+							WordPress</label
+						>
+						<span class="error-text"></span>
+					</div>
+				</fieldset>
+
+				<div class="campo">
+					<!-- TODO 1: terminos → type="checkbox" (ya es checkbox), required -->
+					<label
+						><input type="checkbox" required name="terminos" /> Acepto las
+						condiciones del taller*</label
+					>
+					<span class="error-text"></span>
+				</div>
+
+				<button type="submit">Inscribirme</button>
+				<button type="reset">Reiniciar</button>
+			</form>
+
+			<p id="confirmacion" hidden></p>
+
+			<table id="inscritos">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Correo</th>
+						<th>Procedencia (códigos)</th>
+						<th>Intereses</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</main>
+	</body>
+</html>
