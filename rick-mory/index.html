@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>UP5_A4 · Explorador de Rick and Morty</title>
+		<link rel="stylesheet" href="estilos.css" />
+		<script src="app.js" defer></script>
+	</head>
+	<body>
+		<main>
+			<h1>Explorador de Rick and Morty</h1>
+			<p class="sub">
+				UP5_A4 · Comunicación asíncrona con fetch. Datos de rickandmortyapi.com
+			</p>
+			<p id="aviso-compatibilidad" class="estado error" hidden></p>
+
+			<!-- Vista 1: episodios y buscador -->
+			<div id="vista-episodios">
+				<section>
+					<h2>Buscar personajes</h2>
+					<form id="form-busqueda" class="fila">
+						<label for="busqueda-nombre">Nombre</label>
+						<input
+							id="busqueda-nombre"
+							name="name"
+							type="search"
+							placeholder="rick, morty, summer…"
+							autocomplete="off"
+						/>
+						<label for="busqueda-estado">Estado</label>
+						<select id="busqueda-estado" name="status">
+							<option value="">Todos</option>
+							<option value="alive">Vivo</option>
+							<option value="dead">Muerto</option>
+							<option value="unknown">Desconocido</option>
+						</select>
+					</form>
+					<p id="estado-busqueda" class="estado" role="status"></p>
+					<div id="resultados-busqueda" class="rejilla personajes"></div>
+				</section>
+
+				<section id="section-episodios">
+					<h2>Episodios</h2>
+					<p id="estado-episodios" class="estado" role="status"></p>
+					<button id="reintentar-episodios" class="secundario" hidden>
+						Reintentar
+					</button>
+					<div id="episodios" class="rejilla episodios"></div>
+					<nav class="fila paginacion" aria-label="Paginación de episodios">
+						<button id="pagina-anterior" disabled>← Anterior</button>
+						<span id="pagina-info"></span>
+						<button id="pagina-siguiente">Siguiente →</button>
+					</nav>
+				</section>
+			</div>
+
+			<!-- Vista 2: personajes de un episodio -->
+			<div id="vista-personajes" hidden>
+				<section>
+					<button id="volver" class="secundario">← Volver a episodios</button>
+					<h2 id="titulo-episodio"></h2>
+					<p id="estado-personajes" class="estado" role="status"></p>
+					<button id="reintentar-personajes" class="secundario" hidden>
+						Reintentar
+					</button>
+					<div id="personajes" class="rejilla personajes"></div>
+				</section>
+
+				<section>
+					<h2>Valora este episodio</h2>
+					<form id="form-valoracion" class="fila">
+						<label for="valoracion-nota">Nota</label>
+						<select id="valoracion-nota" name="nota">
+							<option>5</option>
+							<option>4</option>
+							<option>3</option>
+							<option>2</option>
+							<option>1</option>
+						</select>
+						<label for="valoracion-comentario">Comentario</label>
+						<input
+							id="valoracion-comentario"
+							name="comentario"
+							required
+							maxlength="120"
+							placeholder="¿Qué te ha parecido?"
+						/>
+						<button>Enviar</button>
+					</form>
+					<p id="estado-valoracion" class="estado" role="status"></p>
+				</section>
+			</div>
+
+			<!-- Ficha de personaje -->
+			<dialog id="ficha">
+				<img id="ficha-imagen" alt="" width="160" height="160" />
+				<h2 id="ficha-nombre"></h2>
+				<dl id="ficha-datos"></dl>
+				<form method="dialog"><button>Cerrar</button></form>
+			</dialog>
+		</main>
+	</body>
+</html>
