@@ -98,17 +98,12 @@ async function cargarEpisodios(pagina = 1) {
 	try {
 		const response = await fetch(`${API}/episode?page=${pagina}`);
 		const dataEpisodes = await response.json();
-		console.log(dataEpisodes);
 		const episodes = dataEpisodes.results;
 		episodes.forEach((episode) => {
-			const cardEpisode = crear("div", "tarjeta-episodio");
+			const cardEpisode = crear("button", "tarjeta-episodio");
+			cardEpisode.dataset.id = episode.id;
 			const episodeName = episode.name;
-			console.log(episodeName);
-			const episodeNameElement = crear(
-				"strong",
-				"tarjeta-episodio strong",
-				episodeName,
-			);
+			const episodeNameElement = crear("strong", "strong", episodeName);
 			const episodeCodeNumber = `${episode.episode}.`;
 			const episodeCode = crear("spam", "codigo", episodeCodeNumber);
 			const dateEpisodeData = episode.air_date;
@@ -119,11 +114,15 @@ async function cargarEpisodios(pagina = 1) {
 			cardEpisode.appendChild(divInfoEpisode);
 			divInfoEpisode.appendChild(episodeCode);
 			divInfoEpisode.appendChild(date);
+			episodios.set(episode.id, episode);
 		});
+
+		mostrarEstado(estadoEpisodios, "episodios cargados", "ok");
+		seccionEpisodios.appendChild(estadoEpisodios);
 		const allEpisodes = dataEpisodes.info.count;
 		totalPaginas = dataEpisodes.info.pages;
 		const paginaInfo = document.getElementById("pagina-info");
-		paginaInfo.textContent = `pagina ${pagina} de ${allEpisodes}`;
+		paginaInfo.textContent = `pagina ${pagina} de ${totalPaginas}`;
 		paginaActual = pagina;
 		if (totalPaginas > paginaActual) {
 			btnSiguiente.disabled = false;
@@ -142,11 +141,33 @@ async function cargarEpisodios(pagina = 1) {
 
 // ---------- Ejercicio 2 · Personajes de un episodio ----------
 async function verEpisodio(ep) {
-	episodioActual = ep;
 	vistaEpisodios.hidden = true;
 	vistaPersonajes.hidden = false;
-	$("titulo-episodio").textContent = `${ep.episode} · ${ep.name}`;
 	mostrarEstado(estadoValoracion, "");
+	episodioActual = ep;
+	$("titulo-episodio").textContent = `${ep.episode} · ${ep.name}`;
+
+	try {
+		const characters = ep.characters;
+		const ids = characters.map((id) => {
+			const urlPieces = id.split("/");
+			const last = urlPieces.splice(-1);
+			return last.join("");
+		});
+
+		const response = await fetch(`${API}/character/${ids}`);
+		const data = await response.json();
+		console.log(data);
+		data.forEach((personaje) => {
+			const personajesDiv = document.getElementById("personajes");
+			const personajeTarjeta = tarjetaPersonaje(personaje);
+			personajesDiv.appendChild(personajeTarjeta);
+			personajes.set(personaje.id, personaje);
+		});
+	} catch (error) {
+		console.error(error);
+	}
+
 	// TODO: saca los id de ep.characters (son URL que acaban en el id).
 	// TODO: UNA sola petición a `${API}/character/${ids}`. Ojo: con un solo id la API devuelve un objeto, no un array.
 	// TODO: pinta cada personaje con tarjetaPersonaje(p) y guárdalo en el Map personajes. Trata carga y error.
@@ -162,6 +183,28 @@ function volverAEpisodios() {
 function abrirFicha(p) {
 	// TODO: rellena #ficha-imagen, #ficha-nombre y #ficha-datos (pares dt/dd): estado, especie y tipo, género, origen, última localización y número de episodios.
 	// TODO: abre el <dialog> con showModal(). No hace falta otra petición: el dato ya está en el Map.
+	const dialogFicha = document.getElementById("ficha").showModal();
+	const fichaNombre = document.getElementById("ficha-nombre");
+	const fichaDatos = document.getElementById("ficha-datos");
+	const fichaImagen = document.getElementById("ficha-imagen");
+	fichaNombre.textContent = p.name;
+	fichaImagen.src = p.image;
+
+	// fichaDatos.textContent = `estado:${p.status} especie:${p.species} tipo: ${p.type}`;
+
+	fichaDatos.textContent = "";
+	fichaDatos.appendChild(crear("dt", "", "Estado"));
+	fichaDatos.appendChild(crear("dd", "", p.status));
+	fichaDatos.appendChild(crear("dt", "", "especie"));
+	fichaDatos.appendChild(crear("dd", "", p.species));
+	fichaDatos.appendChild(crear("dt", "", "genero"));
+	fichaDatos.appendChild(crear("dd", "", p.gender));
+	fichaDatos.appendChild(crear("dt", "", "origen"));
+	fichaDatos.appendChild(crear("dd", "", p.origin.name));
+	fichaDatos.appendChild(crear("dt", "", "Ultima Localizacion"));
+	fichaDatos.appendChild(crear("dd", "", p.location.name));
+	fichaDatos.appendChild(crear("dt", "", "Episodios"));
+	fichaDatos.appendChild(crear("dd", "", p.episode.length));
 }
 
 /** Delegación: un solo manejador por rejilla de personajes. */
@@ -193,6 +236,7 @@ function comprobarCompatibilidad() {
 // ---------- Eventos (ya hecho) ----------
 contEpisodios.addEventListener("click", (e) => {
 	const tarjeta = e.target.closest(".tarjeta-episodio");
+
 	if (tarjeta) verEpisodio(episodios.get(Number(tarjeta.dataset.id)));
 });
 contPersonajes.addEventListener("click", alPulsarPersonaje);
