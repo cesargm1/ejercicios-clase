@@ -119,7 +119,6 @@ async function cargarEpisodios(pagina = 1) {
 
 		mostrarEstado(estadoEpisodios, "episodios cargados", "ok");
 		seccionEpisodios.appendChild(estadoEpisodios);
-		const allEpisodes = dataEpisodes.info.count;
 		totalPaginas = dataEpisodes.info.pages;
 		const paginaInfo = document.getElementById("pagina-info");
 		paginaInfo.textContent = `pagina ${pagina} de ${totalPaginas}`;
@@ -146,6 +145,7 @@ async function verEpisodio(ep) {
 	mostrarEstado(estadoValoracion, "");
 	episodioActual = ep;
 	$("titulo-episodio").textContent = `${ep.episode} · ${ep.name}`;
+	const personajesDiv = document.getElementById("personajes");
 
 	try {
 		const characters = ep.characters;
@@ -158,8 +158,8 @@ async function verEpisodio(ep) {
 		const response = await fetch(`${API}/character/${ids}`);
 		const data = await response.json();
 		console.log(data);
+		personajesDiv.textContent = "";
 		data.forEach((personaje) => {
-			const personajesDiv = document.getElementById("personajes");
 			const personajeTarjeta = tarjetaPersonaje(personaje);
 			personajesDiv.appendChild(personajeTarjeta);
 			personajes.set(personaje.id, personaje);
@@ -183,15 +183,12 @@ function volverAEpisodios() {
 function abrirFicha(p) {
 	// TODO: rellena #ficha-imagen, #ficha-nombre y #ficha-datos (pares dt/dd): estado, especie y tipo, género, origen, última localización y número de episodios.
 	// TODO: abre el <dialog> con showModal(). No hace falta otra petición: el dato ya está en el Map.
-	const dialogFicha = document.getElementById("ficha").showModal();
+	document.getElementById("ficha").showModal();
 	const fichaNombre = document.getElementById("ficha-nombre");
 	const fichaDatos = document.getElementById("ficha-datos");
 	const fichaImagen = document.getElementById("ficha-imagen");
 	fichaNombre.textContent = p.name;
 	fichaImagen.src = p.image;
-
-	// fichaDatos.textContent = `estado:${p.status} especie:${p.species} tipo: ${p.type}`;
-
 	fichaDatos.textContent = "";
 	fichaDatos.appendChild(crear("dt", "", "Estado"));
 	fichaDatos.appendChild(crear("dd", "", p.status));
@@ -214,7 +211,26 @@ function alPulsarPersonaje(e) {
 }
 
 // ---------- Ejercicio 5 · Buscador con cancelación ----------
+const busquedaNombre = document.getElementById("busqueda-nombre");
+const busquedaEstado = document.getElementById("busqueda-estado");
+console.log(busquedaNombre, busquedaEstado);
+
 async function buscarPersonajes() {
+	busquedaEnCurso?.abort();
+	busquedaEnCurso = new AbortController();
+	try {
+		const params = new URLSearchParams({
+			name: busquedaNombre.value,
+			status: busquedaEstado.value,
+		});
+		const buscadorUrl = `${API}/character/?${params}`;
+		const response = await fetch(buscadorUrl, {
+			signal: busquedaEnCurso.signal,
+		});
+		const data = await response.json();
+	} catch (error) {
+		if (error.name === "AbortError") return;
+	}
 	// TODO: cancela la búsqueda anterior (busquedaEnCurso?.abort()) y crea un AbortController nuevo.
 	// TODO: construye la URL con URLSearchParams a partir del formulario (name y status).
 	// TODO: 404 significa «sin resultados», no es un error. AbortError se ignora.
