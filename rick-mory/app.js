@@ -213,7 +213,7 @@ function alPulsarPersonaje(e) {
 // ---------- Ejercicio 5 · Buscador con cancelación ----------
 const busquedaNombre = document.getElementById("busqueda-nombre");
 const busquedaEstado = document.getElementById("busqueda-estado");
-console.log(busquedaNombre, busquedaEstado);
+console.log(busquedaNombre, busquedaEstado, contResultados);
 
 async function buscarPersonajes() {
 	busquedaEnCurso?.abort();
@@ -223,11 +223,17 @@ async function buscarPersonajes() {
 			name: busquedaNombre.value,
 			status: busquedaEstado.value,
 		});
+		contResultados.textContent = ""
 		const buscadorUrl = `${API}/character/?${params}`;
 		const response = await fetch(buscadorUrl, {
 			signal: busquedaEnCurso.signal,
 		});
 		const data = await response.json();
+		const personajes = data.results
+		personajes.forEach((personaje) => {
+			const personajeTarjeta = tarjetaPersonaje(personaje)
+			contResultados.appendChild(personajeTarjeta)
+		})
 	} catch (error) {
 		if (error.name === "AbortError") return;
 	}
