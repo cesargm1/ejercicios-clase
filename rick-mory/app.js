@@ -246,7 +246,27 @@ async function buscarPersonajes() {
 async function enviarValoracion(e) {
 	e.preventDefault();
 	// TODO: POST a URL_VALORACIONES con { episodioId, nota, comentario } en JSON (method + headers + JSON.stringify).
+	try {
+		const valoracion = {
+			episodioId: 28,
+			nota: 5,
+			comentario: 'Muy bueno',
+		};
+		const response = await fetch(URL_VALORACIONES, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ valoracion }),
+		})
+		const data =  await response.json()
+		console.log(data)
+	} catch (error) {
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+	}
 	// TODO: muestra «Valoración n.º <id> registrada» y reinicia el formulario. Deshabilita el botón mientras se envía.
+
 }
 
 // ---------- Ejercicio 7 · Compatibilidad entre navegadores ----------
