@@ -223,17 +223,17 @@ async function buscarPersonajes() {
 			name: busquedaNombre.value,
 			status: busquedaEstado.value,
 		});
-		contResultados.textContent = ""
+		contResultados.textContent = "";
 		const buscadorUrl = `${API}/character/?${params}`;
 		const response = await fetch(buscadorUrl, {
 			signal: busquedaEnCurso.signal,
 		});
 		const data = await response.json();
-		const personajes = data.results
+		const personajes = data.results;
 		personajes.forEach((personaje) => {
-			const personajeTarjeta = tarjetaPersonaje(personaje)
-			contResultados.appendChild(personajeTarjeta)
-		})
+			const personajeTarjeta = tarjetaPersonaje(personaje);
+			contResultados.appendChild(personajeTarjeta);
+		});
 	} catch (error) {
 		if (error.name === "AbortError") return;
 	}
@@ -246,33 +246,49 @@ async function buscarPersonajes() {
 async function enviarValoracion(e) {
 	e.preventDefault();
 	// TODO: POST a URL_VALORACIONES con { episodioId, nota, comentario } en JSON (method + headers + JSON.stringify).
+	// TODO: muestra «Valoración n.º <id> registrada» y reinicia el formulario. Deshabilita el botón mientras se envía.
+	const valoracionNota = document.getElementById("valoracion-nota");
+	const valoracionComentario = document.getElementById("valoracion-comentario");
 	try {
 		const valoracion = {
-			episodioId: 28,
-			nota: 5,
-			comentario: 'Muy bueno',
+			episodioId: episodioActual.id,
+			nota: valoracionNota.value,
+			comentario: valoracionComentario.value,
 		};
 		const response = await fetch(URL_VALORACIONES, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ valoracion }),
-		})
-		const data =  await response.json()
-		console.log(data)
+		});
+		const data = await response.json();
+		console.log(data);
+		mostrarEstado(
+			estadoValoracion,
+			`Valoración n.º ${data.id} registrada correctamente.`,
+			"ok",
+		);
+		formValoracion.reset();
 	} catch (error) {
-		if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
+		if (!error.ok) throw new Error(`HTTP ${error.status}`);
 	}
-	// TODO: muestra «Valoración n.º <id> registrada» y reinicia el formulario. Deshabilita el botón mientras se envía.
-
 }
 
 // ---------- Ejercicio 7 · Compatibilidad entre navegadores ----------
 function comprobarCompatibilidad() {
 	// TODO: comprueba que existen fetch y AbortController (detección de capacidades, no de navegador).
+	if (!("fetch" in globalThis)) faltan.push("fetch");
+	if (!("AbortController" in globalThis)) faltan.push("AbortController");
 	// TODO: si falta alguna, muestra el aviso en #aviso-compatibilidad y devuelve false.
+
+	if (faltan.length > 0) {
+		const aviso = document.querySelector("#aviso-compatibilidad");
+		aviso.textContent = `Tu navegador no dispone de: ${faltan.join(", ")}`;
+		aviso.hidden = false;
+		return false;
+	}
+	return true;
 }
 
 // ---------- Eventos (ya hecho) ----------
