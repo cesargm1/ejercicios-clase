@@ -1,0 +1,31 @@
+
+[
+    {
+        "id": 1,
+        "nombre": "Individual",
+        "precio": 45,
+        "estado": "libre",
+        "cliente": null
+    },
+    {
+        "id": 2,
+        "nombre": "Doble",
+        "precio": 70,
+        "estado": "ocupada",
+        "cliente": "Laura"
+    },
+    {
+        "id": 3,
+        "nombre": "Suite",
+        "precio": 120,
+        "estado": "libre",
+        "cliente": null
+    },
+    {
+        "id": 4,
+        "nombre": "Familiar",
+        "precio": 95,
+        "estado": "ocupada",
+        "cliente": "Carlos"
+    }
+]

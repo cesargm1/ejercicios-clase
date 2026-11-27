@@ -1,0 +1,50 @@
+/* ✅ Dado · No hace falta tocar nada */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #f3f5f9; color: #1c2333; }
+button { font: inherit; border: 0; border-radius: 8px; padding: 7px 14px; cursor: pointer; background: #1f4fd8; color: #fff; }
+button.secundario { background: #e4e8f0; color: #1c2333; }
+
+.cabecera { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; padding: 12px 20px; background: #1c2333; color: #fff; }
+.cabecera h1 { margin: 0; font-size: 1.25rem; flex: 1; }
+.reloj { margin: 0; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.sesion { display: flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 8px; }
+.sesion strong { font-variant-numeric: tabular-nums; min-width: 2ch; text-align: right; }
+.sesion.alerta { background: #b3261e; animation: parpadeo 1s infinite; }
+@keyframes parpadeo { 50% { opacity: .6; } }
+
+main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+.barra { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; background: #fff; border: 1px solid #dde2ec; border-radius: 10px; padding: 10px 12px; margin-bottom: 14px; }
+.barra .estado { margin: 0; }
+
+.panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.widget { background: #fff; border: 1px solid #dde2ec; border-radius: 10px; padding: 12px 14px; }
+.widget.ancho { grid-column: 1 / -1; }
+.widget header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.widget h2 { margin: 0; font-size: 1.05rem; }
+.tipo { font-size: .75rem; background: #e8efff; color: #1f4fd8; padding: 2px 8px; border-radius: 99px; }
+.fila { display: flex; gap: 8px; margin-top: 8px; }
+
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 8px 0 0; }
+dt { color: #5b6478; }
+dd { margin: 0; font-weight: 600; }
+
+.estado { min-height: 1.3em; margin: 8px 0 0; font-size: .9rem; color: #5b6478; }
+.estado.cargando { color: #8a5a00; }
+.estado.cargando::before { content: "⏳ "; }
+.estado.ok { color: #14803c; }
+.estado.ok::before { content: "✔ "; }
+.estado.error { color: #b3261e; }
+.estado.error::before { content: "✖ "; }
+
+#act-lista { list-style: none; margin: 8px 0 0; padding: 0; }
+#act-lista li { padding: 6px 0; border-top: 1px solid #eef1f6; }
+#act-lista li:first-child { animation: entra .4s; }
+#act-lista time { color: #5b6478; font-variant-numeric: tabular-nums; margin-right: 10px; }
+@keyframes entra { from { background: #fff6d6; } }
+
+.aviso { position: fixed; right: 20px; bottom: 20px; max-width: 320px; background: #1c2333; color: #fff; padding: 12px 16px; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+
+.caducada { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(28,35,51,.7); }
+.caducada[hidden] { display: none; }
+.tarjeta { background: #fff; padding: 20px 26px; border-radius: 12px; text-align: center; }
+.tarjeta h2 { margin-top: 0; }

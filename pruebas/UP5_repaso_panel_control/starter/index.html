@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>UP5 · Panel de administración</title>
+		<link rel="stylesheet" href="estilos.css" />
+		<script src="app.js" defer></script>
+	</head>
+	<body>
+		<header class="cabecera">
+			<h1>Tienda demo · Administración</h1>
+			<p class="reloj" id="reloj">--:--:--</p>
+			<div class="sesion" id="sesion">
+				Sesión: <strong id="sesion-restante">--</strong> s
+				<button id="btn-renovar" class="secundario">Seguir conectado</button>
+			</div>
+		</header>
+
+		<main>
+			<section class="barra">
+				<button id="btn-serie">Recargar en serie</button>
+				<button id="btn-paralelo">Recargar en paralelo</button>
+				<label
+					><input type="checkbox" id="chk-fallos" /> Simular fallos del
+					servidor</label
+				>
+				<p id="tiempo-carga" class="estado" role="status"></p>
+			</section>
+
+			<div class="panel">
+				<article class="widget" id="w-resumen">
+					<header>
+						<h2>Resumen de hoy</h2>
+						<span class="tipo">1 petición</span>
+					</header>
+					<p class="estado" role="status"></p>
+					<dl>
+						<dt>Ventas</dt>
+						<dd id="res-ventas">—</dd>
+						<dt>Pedidos</dt>
+						<dd id="res-pedidos">—</dd>
+						<dt>Tickets abiertos</dt>
+						<dd id="res-tickets">—</dd>
+					</dl>
+				</article>
+
+				<article class="widget" id="w-pedido">
+					<header>
+						<h2>Último pedido</h2>
+						<span class="tipo">2 peticiones encadenadas</span>
+					</header>
+					<p class="estado" role="status"></p>
+					<dl>
+						<dt>Pedido</dt>
+						<dd id="ped-id">—</dd>
+						<dt>Total</dt>
+						<dd id="ped-total">—</dd>
+						<dt>Estado</dt>
+						<dd id="ped-estado">—</dd>
+						<dt>Cliente</dt>
+						<dd id="ped-cliente">—</dd>
+						<dt>Ciudad</dt>
+						<dd id="ped-ciudad">—</dd>
+					</dl>
+				</article>
+
+				<article class="widget ancho" id="w-actividad">
+					<header>
+						<h2>Actividad en directo</h2>
+						<span class="tipo">sondeo cada 3 s</span>
+					</header>
+					<div class="fila">
+						<button id="btn-act-iniciar">Iniciar</button>
+						<button id="btn-act-detener" class="secundario">Detener</button>
+					</div>
+					<p class="estado" role="status"></p>
+					<ul id="act-lista"></ul>
+				</article>
+			</div>
+		</main>
+
+		<div id="aviso" class="aviso" role="alert" hidden></div>
+
+		<div id="caducada" class="caducada" hidden>
+			<div class="tarjeta">
+				<h2>Sesión caducada</h2>
+				<p>Has estado demasiado tiempo sin actividad.</p>
+				<button id="btn-volver">Volver a entrar</button>
+			</div>
+		</div>
+	</body>
+</html>

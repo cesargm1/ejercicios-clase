@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Gestión del Hotel – Examen DWEC</title>
+		<link href="bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body class="bg-light">
+		<div class="container py-4">
+			<h1 class="text-center mb-4">Gestión del Hotel</h1>
+
+			<!-- LOGIN -->
+			<section
+				id="login"
+				class="card p-4 shadow-sm mx-auto"
+				style="max-width: 450px"
+			>
+				<h2 class="mb-3">Iniciar sesión</h2>
+				<form id="formLogin" class="mb-3">
+					<div class="mb-3">
+						<label class="form-label">Usuario</label>
+						<input type="text" id="loginUsuario" class="form-control" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Contraseña</label>
+						<input type="password" id="loginPass" class="form-control" />
+					</div>
+					<button type="submit" class="btn btn-primary w-100">Acceder</button>
+				</form>
+				<div id="loginError" class="text-danger mb-2"></div>
+			</section>
+
+			<!-- GESTIÓN -->
+			<section id="gestion" style="display: none">
+				<div class="card p-4 shadow-sm mt-4">
+					<div id="sesionAnterior" class="text-muted small"></div>
+					<h2>Añadir habitación</h2>
+					<form id="formAddHabitacion" class="row g-3 mt-2">
+						<div class="col-md-3">
+							<label class="form-label">ID</label>
+							<input type="number" id="habitacionId" class="form-control" />
+						</div>
+						<div class="col-md-5">
+							<label class="form-label">Nombre</label>
+							<input type="text" id="habitacionNombre" class="form-control" />
+						</div>
+						<div class="col-md-4">
+							<label class="form-label">Precio por noche</label>
+							<input type="number" id="habitacionPrecio" class="form-control" />
+						</div>
+						<div class="col-12">
+							<button type="submit" class="btn btn-success w-100">
+								Añadir habitación
+							</button>
+						</div>
+					</form>
+					<div id="addError" class="text-danger mt-2"></div>
+				</div>
+
+				<!-- PANEL -->
+				<div class="card p-4 shadow-sm mt-4">
+					<h2>Panel de habitaciones</h2>
+					<div id="panel" class="row g-3 mt-1"></div>
+					<div id="mensaje" class="fw-bold mt-3"></div>
+					<button id="btnRecargar" class="btn btn-secondary mt-3">
+						Recargar desde JSON
+					</button>
+				</div>
+
+				<!-- ESTADÍSTICAS -->
+				<div class="card p-4 shadow-sm mt-4">
+					<h2>Estadísticas</h2>
+					<pre
+						id="estadisticasBox"
+						class="bg-dark text-light p-3 rounded mt-2"
+					></pre>
+				</div>
+			</section>
+		</div>
+		<script src="app.js"></script>
+	</body>
+</html>
